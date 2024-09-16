@@ -24,6 +24,8 @@ export const primary = {
   dark: '#0C44AE',
   darker: '#042174',
   contrastText: '#FFFFFF',
+  main: '#212b36',
+  primary: '#e4222e', //red
 };
 
 export const secondary = {
@@ -51,6 +53,7 @@ export const success = {
   dark: '#007867',
   darker: '#004B50',
   contrastText: '#FFFFFF',
+  special: '#118d57',
 };
 
 export const warning = {
@@ -69,6 +72,11 @@ export const error = {
   dark: '#B71D18',
   darker: '#7A0916',
   contrastText: '#FFFFFF',
+  special: '#b71d18',
+};
+
+export const progress = {
+  special: '#b76e00',
 };
 
 export const common = {
@@ -112,7 +120,7 @@ export function palette() {
     },
     background: {
       paper: '#FFFFFF',
-      default: grey[100],
+      default: '#FFFFFF',
       neutral: grey[200],
     },
     action: {

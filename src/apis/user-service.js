@@ -1,41 +1,17 @@
-import { axiosInstance, methods, publicApi } from 'src/utils/axios-instance';
+import { HEADERS_TYPE } from 'src/resources/common';
+import { methods, callApi } from 'src/utils/api-config';
 
-const userService = {
-  GetAllUsers: async () => {
-    // const resp = axiosInstance.get('v1/user/get-all');
-    // return resp;
-    const data = await publicApi('v1/user/get-all', methods.get, null);
-    console.log(data);
-    return data;
-  },
-
-  CreateNewUser: async (data) => {
-    const resp = axiosInstance.post('v1/user/create', data, {
-      headers: {
-        'Content-Type': 'multipart/form-data',
-        timeout: 1000,
-      },
-    });
-    return resp;
-  },
-
-  GetAllRoles: async () => {
-    const data = await publicApi('v1/role/get-all', methods.get, null);
-    console.log(data);
-    return data;
-  },
-
-  LoginUser: async (body) => {
-    // const resp = axiosInstance.post('v1/user/login', body, {
-    //   headers: {
-    //     'Content-Type': 'application/json',
-    //   },
-    // });
-    // const data = await resp.json();
-    // return data;
-    const data = await publicApi('v1/user/login', methods.post, body);
-    return data;
-  },
+export const userService = {
+  GetAllUsers: async () => await callApi('v1/user/get-all', methods.get, HEADERS_TYPE.json, null),
+  CreateNewUser: async (body) =>
+    await callApi('v1/user/create', methods.post, HEADERS_TYPE.multipart, body),
+  GetAllRoles: async () => await callApi('v1/role/get-all', methods.get, HEADERS_TYPE.json, null),
+  LoginUser: async (body) => await callApi('v1/user/login', methods.post, HEADERS_TYPE.json, body),
+  LogoutUser: async () => await callApi('v1/user/logout', methods.post, HEADERS_TYPE.json, null),
+  getUserById: async (p) =>
+    await callApi(`v1/user?id=${p.id}`, methods.get, HEADERS_TYPE.json, null),
+  getRoleById: async (p) =>
+    await callApi(`v1/role?id=${p.id}`, methods.get, HEADERS_TYPE.json, null),
+  updateUser: async (p) =>
+    await callApi(`v1/user/update?id=${p.get('id')}`, methods.put, HEADERS_TYPE.multipart, p),
 };
-
-export { userService };
